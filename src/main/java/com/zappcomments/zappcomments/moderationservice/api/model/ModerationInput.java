@@ -1,5 +1,6 @@
 package com.zappcomments.zappcomments.moderationservice.api.model;
 
+import io.hypersistence.tsid.TSID;
 import lombok.Builder;
 import lombok.Data;
 
