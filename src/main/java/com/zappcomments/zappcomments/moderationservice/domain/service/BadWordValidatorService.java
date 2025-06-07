@@ -1,4 +1,4 @@
-package com.zappcomments.zappcomments.moderationservice.api.service;
+package com.zappcomments.zappcomments.moderationservice.domain.service;
 
 import org.springframework.stereotype.Service;
 import java.util.Set;

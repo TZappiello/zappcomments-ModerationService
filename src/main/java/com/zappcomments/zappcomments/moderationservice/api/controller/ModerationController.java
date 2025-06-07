@@ -2,7 +2,7 @@ package com.zappcomments.zappcomments.moderationservice.api.controller;
 
 import com.zappcomments.zappcomments.moderationservice.api.model.ModerationInput;
 import com.zappcomments.zappcomments.moderationservice.api.model.ModerationOutput;
-import com.zappcomments.zappcomments.moderationservice.api.service.BadWordValidatorException;
+import com.zappcomments.zappcomments.moderationservice.domain.service.BadWordValidatorException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.zappcomments.zappcomments.moderationservice.api.service.BadWordValidatorService.validate;
+import static com.zappcomments.zappcomments.moderationservice.domain.service.BadWordValidatorService.validate;
 
 @RestController
 @RequestMapping("/api/moderate")
