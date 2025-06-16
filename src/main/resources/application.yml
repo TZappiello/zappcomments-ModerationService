@@ -1,7 +1,11 @@
-spring:
-  application:
-    name: zappcomments-ModerationService
-
 server:
   port: 8081
 
+spring:
+  application:
+    name: zappcomments-ModerationService
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
