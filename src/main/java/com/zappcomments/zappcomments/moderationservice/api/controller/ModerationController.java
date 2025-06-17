@@ -4,8 +4,7 @@ import com.zappcomments.zappcomments.moderationservice.api.model.ModerationInput
 import com.zappcomments.zappcomments.moderationservice.api.model.ModerationOutput;
 import com.zappcomments.zappcomments.moderationservice.domain.service.BadWordValidatorException;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +15,8 @@ import static com.zappcomments.zappcomments.moderationservice.domain.service.Bad
 @RestController
 @RequestMapping("/api/moderate")
 @RequiredArgsConstructor
+@Slf4j
 public class ModerationController {
-
-    private static final Logger logger = LoggerFactory.getLogger(ModerationController.class);
 
     @PostMapping
     public ModerationOutput moderate(@RequestBody ModerationInput input) {
@@ -26,7 +24,7 @@ public class ModerationController {
 
             validate(input.getText().toLowerCase());
 
-            logger.info("Comment approved: {}", input.getText());
+            log.info("Comment approved: {}", input.getText());
             return ModerationOutput.builder()
                     .reason("Content is acceptable")
                     .approved(true)
@@ -34,7 +32,7 @@ public class ModerationController {
 
         } catch (BadWordValidatorException e) {
 
-            logger.warn("Comment rejected: {}. Reason: {}", input.getText(), e.getMessage());
+            log.warn("Comment rejected: {}. Reason: {}", input.getText(), e.getMessage());
             return ModerationOutput.builder()
                     .reason(e.getMessage())
                     .approved(false)
