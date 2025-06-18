@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class PostInput {
+public class PostInputConsumer {
 
-    private String title;
-    private String body;
-    private String author;
+    private String postId;
+    private String postBody;
+
 }
