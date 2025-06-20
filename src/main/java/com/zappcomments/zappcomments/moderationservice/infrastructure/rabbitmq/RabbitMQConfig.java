@@ -8,10 +8,14 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
+
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String TEXT_PROCESSOR_SERVICE_POST_PROCESSING = "text-processor-service.post-processing.v1.q";
+    public static final String POST_PROCESSING = "text-processor-service.post-processing.v1";
+    public static final String TEXT_PROCESSOR_SERVICE_POST_PROCESSING = POST_PROCESSING + ".q";
+    public static final String DEAD_LETTER_QUEUE_POST_PROCESSING = POST_PROCESSING + ".dlq";
 
     @Bean
     public RabbitAdmin rabbitAdmin(ConnectionFactory factory) {
@@ -25,7 +29,16 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue queuePosts() {
-        return QueueBuilder.durable(TEXT_PROCESSOR_SERVICE_POST_PROCESSING).build();
+        Map<String, Object> args = Map.of(
+            "x-dead-letter-exchange", "",
+            "x-dead-letter-routing-key", DEAD_LETTER_QUEUE_POST_PROCESSING
+        );
+        return QueueBuilder.durable(TEXT_PROCESSOR_SERVICE_POST_PROCESSING).withArguments(args).build();
+    }
+
+    @Bean
+    public Queue deadLetterQueuePosts() {
+        return QueueBuilder.durable(DEAD_LETTER_QUEUE_POST_PROCESSING).build();
     }
 
     public FanoutExchange fanoutExchange() {

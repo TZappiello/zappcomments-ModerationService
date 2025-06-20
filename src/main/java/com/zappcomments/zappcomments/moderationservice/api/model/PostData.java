@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class PostData {
 
-    private String postId;
+    private String id;
     private Integer wordCount;
     private Double calculatedValue;
 }
