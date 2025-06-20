@@ -29,7 +29,7 @@ public class TextProcessorService {
                 .setScale(2, RoundingMode.HALF_UP);
 
         return PostData.builder()
-                .postId(postInputConsumer.getPostId())
+                .id(postInputConsumer.getPostId())
                 .wordCount(wordCount)
                 .calculatedValue(calculatedValue.doubleValue())
                 .build();
@@ -42,7 +42,7 @@ public class TextProcessorService {
                 "", postData);
 
         log.info("Processed post with ID: {}, Word Count: {}, Calculated Value: {}",
-                postData.getPostId(), postData.getWordCount(), postData.getCalculatedValue());
+                postData.getId(), postData.getWordCount(), postData.getCalculatedValue());
     }
 
 }
